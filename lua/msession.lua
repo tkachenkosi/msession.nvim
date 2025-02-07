@@ -11,7 +11,8 @@ local original_lines = {}
 local max_len_buffer = 0
 -- окно откуда был запуск и в котором нужно поменять содержимое
 local session_name = "/.session"
-M.root_dir = ""
+-- домашняя директория
+M.home_dir = ""
 
 M.curr_session = "*"
 
@@ -50,7 +51,7 @@ end
 
 -- укорачиватель путей заменой home на ~
 local function short_path(comfirm)
-	return string.gsub(comfirm, M.root_dir, "~", 1)
+	return string.gsub(comfirm, M.home_dir, "~", 1)
 end
 
 -- Функция для добавления строки в файл
@@ -60,7 +61,7 @@ function M.add_session_to_list()
 	local count = 0
 
 	M.close()
-	if not confirm_input("Save session? "..root_dir) then
+	if not confirm_input("Save? "..root_dir) then
 		return
 	end
 
@@ -284,7 +285,7 @@ function M.load_session()
 		-- загружаем выбранную сессию
 		vim.cmd("cd " .. session_path)
 		print("Goto: " .. session_path)
-		if confirm_input("Load session? "..short_path(session_path)) then
+		if confirm_input("Load? "..short_path(session_path)) then
 			-- сохраним текущию сессию в глобальную переменную для подсветки в списке
 			M.curr_session = short_path(session_path)
 			-- Закрыть все окна, кроме текущего
@@ -343,13 +344,13 @@ end
 function M.setup(options)
 	M.config = vim.tbl_deep_extend("force", M.config, options or {})
 
-	M.root_dir = tostring(os.getenv("HOME"))
+	M.home_dir = tostring(os.getenv("HOME"))
 	-- vim.api.nvim_create_user_command("StartMsession", M.start, {})
 end
 
 -- Функция для запуска менеджера буферов
 function M.start()
-	-- M.root_dir = tostring(os.getenv("HOME"))
+	-- M.home_dir = tostring(os.getenv("HOME"))
 	get_sessions_list()
 
   -- Создаём окно ввода фильтра
