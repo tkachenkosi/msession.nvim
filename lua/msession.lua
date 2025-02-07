@@ -198,12 +198,12 @@ local function create_main_window()
 	vim.api.nvim_buf_set_option(main_buf, "readonly", true)
 	vim.api.nvim_buf_set_option(main_buf, "modifiable", false)
 
-	vim.api.nvim_buf_set_keymap(main_buf, "n", "<Esc>", "<cmd>lua require('my.msession').close()<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(main_buf, "n", "q", "<cmd>lua require('my.msession').close()<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(main_buf, "n", "f", "<cmd>lua require('my.msession').select_filter_window()<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(main_buf, "n", "s", "<cmd>lua require('my.msession').add_session_to_list()<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(main_buf, "n", "<c-Up>", "<cmd>lua require('my.msession').select_filter_window()<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(main_buf, "n", "<CR>", "<cmd>lua require('my.msession').load_session()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "<Esc>", "<cmd>lua require('msession').close()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "q", "<cmd>lua require('msession').close()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "f", "<cmd>lua require('msession').select_filter_window()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "s", "<cmd>lua require('msession').add_session_to_list()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "<c-Up>", "<cmd>lua require('msession').select_filter_window()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "<CR>", "<cmd>lua require('msession').load_session()<CR>", { noremap = true, silent = true })
 	print("Esc-close f-filter s-save Enter-select")
 end
 
@@ -243,9 +243,9 @@ local function create_filter_window()
 		vim.cmd("star")
 
     -- Устанавливаем клавишу Esc для закрытия окна
-    vim.api.nvim_buf_set_keymap(filter_buf, "i", "<Esc>", "<cmd>lua require('my.msession').close()<CR>", { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(filter_buf, "i", "<CR>", "<cmd>lua require('my.msession').select_main_window()<CR>", { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(filter_buf, "i", "<Down>", "<cmd>lua require('my.msession').select_main_window()<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(filter_buf, "i", "<Esc>", "<cmd>lua require('msession').close()<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(filter_buf, "i", "<CR>", "<cmd>lua require('msession').select_main_window()<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(filter_buf, "i", "<Down>", "<cmd>lua require('msession').select_main_window()<CR>", { noremap = true, silent = true })
 
     -- Устанавливаем обработчик ввода текста
     vim.api.nvim_buf_attach(filter_buf, false, {
