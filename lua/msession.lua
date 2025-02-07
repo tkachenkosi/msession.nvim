@@ -112,7 +112,7 @@ function M.add_session_to_list()
 	else
 			print("\nОшибка: не удалось открыть файл для записи.")
 	end
-	print("\nSave session Ok.")
+	print("\nSave Ok. "..root_dir)
 end
 
 -- Функция для подсветки даты в имени сессии
@@ -296,7 +296,8 @@ function M.load_session()
 	else
 		print("Нет файла! " .. session)
 	end
-	print("Load session Ok.")
+	-- для проверки что мы в нужном каталоге
+	print("Load Ok. "..short_path(vim.fn.getcwd()))
 end
 
 -- для переключение на окно с 
