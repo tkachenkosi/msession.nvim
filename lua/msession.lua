@@ -205,7 +205,7 @@ local function create_main_window()
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "s", "<cmd>lua require('msession').add_session_to_list()<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "<c-Up>", "<cmd>lua require('msession').select_filter_window()<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "<CR>", "<cmd>lua require('msession').load_session()<CR>", { noremap = true, silent = true })
-	print("Esc-close f-filter s-save Enter-select")
+	print("f-filter, s-save. "..short_path(vim.fn.getcwd()))
 end
 
 -- Функция для создания окна ввода фильтра
