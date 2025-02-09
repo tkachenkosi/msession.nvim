@@ -295,8 +295,6 @@ function M.load_session()
 	if session_exists(session) then
 		-- загружаем выбранную сессию
 		vim.cmd("cd "..session_path)
-		-- print("Goto: "..session_path)
-		vim.notify("Goto: "..session_path, "info")
 		-- если один буфер запрос пользователя не делаем
 		if get_count_buffers() <=	1 or confirm_input("Load? "..short_path(session_path)) then
 			-- сохраним текущию сессию в глобальную переменную для подсветки в списке
@@ -306,13 +304,13 @@ function M.load_session()
 			-- Закрыть все буферы, кроме текущего
 			vim.cmd("bufdo bdelete")
 			vim.cmd("so .session")
+			print("Load Ok. "..short_path(vim.fn.getcwd()))
+			return
 		end
+		print("Goto: "..session_path)
 	else
 		print("Нет файла! " .. session)
 	end
-	-- для проверки что мы в нужном каталоге
-	-- print("Load Ok. "..short_path(vim.fn.getcwd()))
-	vim.notify("Load Ok. "..short_path(vim.fn.getcwd()), "info")
 end
 
 -- для переключение на окно с 
