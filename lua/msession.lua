@@ -303,7 +303,7 @@ function M.load_session()
 			vim.cmd("only")
 			-- Закрыть все буферы, кроме текущего
 			vim.cmd("bufdo bdelete")
-			vim.cmd("so .session")
+			vim.cmd("silent! source .session")
 			print("Load Ok. "..short_path(vim.fn.getcwd()))
 			return
 		end
