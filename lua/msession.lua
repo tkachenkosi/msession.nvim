@@ -273,17 +273,6 @@ local function create_filter_window()
     })
 end
 
--- определяем количество открытых буферов
-local function get_count_buffers()
-	local count = 0
-	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-			if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf) ~= "" then
-				count = count + 1
-			end
-	end
-	return count
-end
-
 -- загрузка cсессии
 function M.load_session()
 	local session_path = vim.fn.expand(string.sub(vim.api.nvim_get_current_line(), 5, -1))
@@ -296,7 +285,7 @@ function M.load_session()
 		-- загружаем выбранную сессию
 		vim.cmd("cd "..session_path)
 		-- если один буфер запрос пользователя не делаем
-		if get_count_buffers() <=	1 or confirm_input("Load? "..short_path(session_path)) then
+		if confirm_input("Load? "..short_path(session_path)) then
 			-- сохраним текущию сессию в глобальную переменную для подсветки в списке
 			M.curr_session = short_path(session_path)
 			-- Закрыть все окна, кроме текущего
