@@ -117,6 +117,11 @@ function M.add_session_to_list()
 	print("\nSave Ok. "..root_dir)
 end
 
+-- функция для привязки к событию когда окно теряет фокус
+local function on_win_leave()
+M.close()
+end
+
 -- Функция для подсветки даты в имени сессии
 local function highlight_in_filename(line, line_number)
     -- local last_slash_pos = line:find("/[^/]*$")
@@ -169,6 +174,12 @@ local function create_main_window()
 	for i, line in ipairs(original_lines) do
 		highlight_in_filename(line, i)
 	end
+
+	-- привязываем событие когда окно теряет форкус
+	vim.api.nvim_create_autocmd('WinLeave', {
+    callback = on_win_leave,
+    buffer = main_buf,  -- Привязываем к конкретному буферу
+  })
 
 	-- Создаём основное окно
 	local width = 0
