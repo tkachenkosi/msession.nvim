@@ -1,5 +1,6 @@
--- Модуль для живого поиска
 local M = {}
+
+vim.g.msession_windows = nil
 
 -- Основной буфер и окно
 local main_buf, main_win
@@ -337,6 +338,7 @@ function M.mks_session()
 end
 
 function M.close()
+	vim.g.msession_windows = nil
 	original_lines = {}
 	-- Закрываем окна для фильтра и буфероф
 	vim.api.nvim_win_close(filter_win, true)
@@ -356,6 +358,10 @@ end
 
 -- Функция для запуска менеджера буферов
 function M.start()
+	if vim.g.msession_windows ~= nil then
+		return
+	end
+	vim.g.msession_windows = 1
 	-- M.home_dir = tostring(os.getenv("HOME"))
 	get_sessions_list()
 
