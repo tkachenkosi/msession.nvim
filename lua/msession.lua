@@ -118,9 +118,9 @@ function M.add_session_to_list()
 end
 
 -- функция для привязки к событию когда окно теряет фокус
-local function on_win_leave()
-M.close()
-end
+-- local function on_win_leave()
+-- M.close()
+-- end
 
 -- Функция для подсветки даты в имени сессии
 local function highlight_in_filename(line, line_number)
@@ -176,10 +176,10 @@ local function create_main_window()
 	end
 
 	-- привязываем событие когда окно теряет форкус
-	vim.api.nvim_create_autocmd('WinLeave', {
-    callback = on_win_leave,
-    buffer = main_buf,  -- Привязываем к конкретному буферу
-  })
+	-- vim.api.nvim_create_autocmd('WinLeave', {
+	--    callback = on_win_leave,
+	--    buffer = main_buf,  -- Привязываем к конкретному буферу
+	--  })
 
 	-- Создаём основное окно
 	local width = 0
