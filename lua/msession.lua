@@ -216,6 +216,8 @@ local function create_main_window()
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "f", "<cmd>lua require('msession').select_filter_window()<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "s", "<cmd>lua require('msession').add_session_to_list()<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "<c-Up>", "<cmd>lua require('msession').select_filter_window()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "<Home>", "<Cmd>lua require('msession').select_first_line()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(main_buf, "n", "<End>", "<Cmd>lua require('msession').select_last_line()<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(main_buf, "n", "<CR>", "<cmd>lua require('msession').load_session()<CR>", { noremap = true, silent = true })
 	print("f-filter, s-save. "..short_path(vim.fn.getcwd()))
 end
@@ -312,6 +314,18 @@ function M.load_session()
 	else
 		print("Нет файла! " .. session)
 	end
+end
+
+-- переход на первую строку
+function M.select_first_line()
+	vim.api.nvim_win_set_cursor(0, { 1, 0 })
+end
+
+-- переход  на последнию строку
+function M.select_last_line()
+	-- Получаем количество строк в текущем буфере
+	-- Перемещаем курсор на последнюю строку
+	vim.api.nvim_win_set_cursor(0, { vim.api.nvim_buf_line_count(0), 0 })
 end
 
 -- для переключение на окно с 
