@@ -19,7 +19,7 @@ M.curr_session = "*"
 
 M.config = {
 	width_win = 0,												-- ширина окна, если = 0 вычисляется
-	color_cursor_line = "#2b2b2b",				-- цвет подсветки строки с курсором
+	color_cursor_line = "#442222",				-- цвет подсветки строки с курсором
 	color_cursor_mane_line = "#2b2b2b",		-- цвет подсветки строки в основном редакторе
 	color_light_filter = "#194d19",				-- цвет строки ввода фильтра
 	color_light_date = "#ada085",					-- цвет выделения даты из имени файла
@@ -377,11 +377,17 @@ end
 function M.setup(options)
 	M.config = vim.tbl_deep_extend("force", M.config, options or {})
 
+	-- получение цвета фона текущец строки
+	local hl = vim.api.nvim_get_hl(0, { name = 'CursorLine' })
+	if hl.bg then
+		M.config.color_cursor_mane_line = hl.bg
+	end
+
 	M.home_dir = tostring(os.getenv("HOME"))
 	-- vim.api.nvim_create_user_command("StartMsession", M.start, {})
 end
 
--- Функция для запуска менеджера буферов
+-- Функция для запуска менеджера буферов с клавиатуры
 function M.start()
 	if vim.g.mm_windows ~= nil then
 		return
