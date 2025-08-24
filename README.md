@@ -2,6 +2,9 @@
 ---
 #### Installation and Usage:
 ```
+vim.keymap.set({'n', 'i'}, '<F12>', function() require('mbuffers').start(); end)
+vim.keymap.set('n', '<leader><F12>', function() require('msession').start(); end)
+
 {
 "tkachenkosi/msession.nvim",
 config = function()
