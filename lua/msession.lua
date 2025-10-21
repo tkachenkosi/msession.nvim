@@ -355,10 +355,10 @@ function M.select_filter_window()
 		vim.cmd("star")
 end
 
-function M.mks_session()
-	vim.cmd("mks! .session")
-	print("Save Ok. "..short_path(vim.fn.getcwd()))
-end
+-- function M.mks_session()
+-- 	vim.cmd("mks! .session")
+-- 	print("Save Ok. "..short_path(vim.fn.getcwd()))
+-- end
 
 function M.close()
 	vim.g.mm_windows = nil
